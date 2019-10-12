@@ -22,6 +22,13 @@ To convert HTML to markdown
 $html = Markdown::toHtml($markdown);
 ```
 
+By default markdown is escaped before converting to HTML this prevents people putting malcious HTML code. You can disable this by passing the options array with `escape` set to false.
+
+```php
+Markdown::toHtml($markdown,['escape'=>false]);
+```
+
+
 ## Convert markdown To Text
 
 To convert markdown to text:

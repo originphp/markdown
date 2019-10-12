@@ -125,7 +125,7 @@ class Markdown
      *
      * @param string $Markdown
      * @param array $options The following option keys are supported:
-     *   -escape: default is false. Escapes all text before passing. Code blocks are always escaped
+     *   -escape: default is true. Escapes all text before passing. Code blocks are always escaped
      * @return string
      */
     public static function toHtml(string $Markdown, array $options = []): string
