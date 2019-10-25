@@ -6,6 +6,25 @@ use Origin\Markdown\Markdown;
 
 class MarkdownTest extends \PHPUnit\Framework\TestCase
 {
+    public function testLink()
+    {
+        $string = 'This is a [Test](http://www.example.com).';
+        $this->assertEquals('<p>This is a <a href="http://www.example.com">Test</a>.</p>', Markdown::toHtml($string));
+
+        $string = 'This is a [Test](http://www.example.com/t1) and [Test 2](http://www.example.com/t2)';
+        $this->assertEquals('<p>This is a <a href="http://www.example.com/t1">Test</a> and <a href="http://www.example.com/t2">Test 2</a></p>', Markdown::toHtml($string));
+    }
+
+    public function testImage()
+    {
+        $string = 'Google Logo ![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/220px-Google_2015_logo.svg.png) is cool';
+        $this->assertStringContainsString('<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/220px-Google_2015_logo.svg.png" alt="">', Markdown::toHtml($string));
+        $string = '![logo 3](http://a.com/img/logo3.png)';
+        $this->assertStringContainsString('<img src="http://a.com/img/logo3.png" alt="logo 3">', Markdown::toHtml($string));
+        $string = 'A ![](http://a.com/img/logo1.png) B ![](http://a.com/img/logo2.png) C ![logo 3](http://a.com/img/logo3.png)';
+        $this->assertEquals('<p>A <img src="http://a.com/img/logo1.png" alt=""> B <img src="http://a.com/img/logo2.png" alt=""> C <img src="http://a.com/img/logo3.png" alt="logo 3"></p>', Markdown::toHtml($string));
+    }
+
     public function testToText()
     {
         $text = <<< EOF
@@ -127,7 +146,7 @@ Combined emphasis with **asterisks and _underscores_**.
 Strikethrough uses two tildes. ~~Scratch this.~~
 EOF;
         $expected = '288d423d9404962691e75a88a3e3384a';
-     
+
         $this->assertEquals($expected, md5(Markdown::toHtml($text)));
         $this->assertEquals($expected, md5(Markdown::toHtml($text, ['escape' => false])));
     }

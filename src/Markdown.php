@@ -139,7 +139,7 @@ class Markdown
 
         $Markdown = static::parseHeadings($Markdown);
 
-        $Markdown = preg_replace_callback('/!\[(.*)\]\((.*)\)/', function ($matches) {
+        $Markdown = preg_replace_callback('#!\[([^\]]*)\]\(([^\)]*)\)#', function ($matches) {
             $alt = static::escape($matches[1]);
 
             // Remove invalid urls
@@ -151,10 +151,9 @@ class Markdown
             return '<img src="'.$src.'" alt="'.$alt.'">';
         }, $Markdown);
 
-        $Markdown = preg_replace_callback('/\[(.*)\]\((.*)\)/', function ($matches) {
+        $Markdown = preg_replace_callback('#\[([^\[]+)\]\(([^\)]+)\)#', function ($matches) {
             $Markdown = static::escape($matches[1]);
             
-            // Remove invalid urls
             $href = '';
             if (filter_var($matches[2], FILTER_VALIDATE_URL)) {
                 $href = static::escape($matches[2]);
