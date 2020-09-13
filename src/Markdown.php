@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 /**
  * OriginPHP Framework
- * Copyright 2018 - 2019 Jamiel Sharief.
+ * Copyright 2018 - 2020 Jamiel Sharief.
  *
  * Licensed under The MIT License
  * The above copyright notice and this permission notice shall be included in all copies or substantial
@@ -69,7 +69,7 @@ class Markdown
         # Links stay the same
         $lines = explode("\n", $Markdown);
         foreach ($lines as $index => $line) {
-            if ($line and $line[0] === '|') {
+            if ($line && $line[0] === '|') {
                 if (strpos($line, '---') !== false) {
                     unset($lines[$index]);
                     continue;
@@ -321,7 +321,7 @@ class Markdown
             if ($isTable) {
                 $cells = explode('|', substr($line, 1, -1));
                 $cells = array_map('trim', $cells);
-                if (isset($lines[$i + 1]) and strpos($lines[$i + 1], '---') !== false) {
+                if (isset($lines[$i + 1]) && strpos($lines[$i + 1], '---') !== false) {
                     $line = '<tr><th>' . implode('</th><th>', $cells) . '</th></tr>';
                 } else {
                     if (strpos($line, '---') === false) {
@@ -425,7 +425,7 @@ class Markdown
                 $indent = static::getIndentLevel($tag);
                 $pre = str_repeat(' ', $indent);
                 foreach ($tag->childNodes as $child) {
-                    if (isset($child->tagName) and $child->tagName === 'li') {
+                    if (isset($child->tagName) && $child->tagName === 'li') {
                         $child->nodeValue = $lineBreak . $pre .  $count . '. ' . static::htmlspecialchars($child->nodeValue);
                         $child->nodeValue = rtrim($child->nodeValue) . PHP_EOL; // friendly with nested lists
                         $count++;
@@ -443,7 +443,7 @@ class Markdown
                 foreach ($tag->getElementsByTagName('tr') as $node) {
                     $row = [];
                     foreach ($node->childNodes as $child) {
-                        if (isset($child->tagName) and ($child->tagName === 'td' or $child->tagName === 'th')) {
+                        if (isset($child->tagName) && ($child->tagName === 'td' || $child->tagName === 'th')) {
                             if ($child->tagName === 'th') {
                                 $headers = true;
                             }
@@ -468,7 +468,7 @@ class Markdown
                 $pre = str_repeat(' ', $indent);
 
                 foreach ($tag->childNodes as $child) {
-                    if (isset($child->tagName) and $child->tagName === 'li') {
+                    if (isset($child->tagName) && $child->tagName === 'li') {
                         $child->nodeValue = $lineBreak . $pre . '* ' .   static::htmlspecialchars($child->nodeValue);
                         $child->nodeValue = rtrim($child->nodeValue) . PHP_EOL; // friendly with nested lists
                         $lineBreak = null;
