@@ -1,7 +1,7 @@
 # Markdown
 
 ![license](https://img.shields.io/badge/license-MIT-brightGreen.svg)
-[![build](https://travis-ci.org/originphp/markdown.svg?branch=master)](https://travis-ci.org/originphp/markdown)
+[![build](https://github.com/originphp/markdown/workflows/CI/badge.svg)](https://github.com/originphp/markdown/actions)
 [![coverage](https://coveralls.io/repos/github/originphp/markdown/badge.svg?branch=master)](https://coveralls.io/github/originphp/markdown?branch=master)
 
 The Markdown utility gives you useful functions for converting to and from markdown.
